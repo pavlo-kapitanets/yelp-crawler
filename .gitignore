@@ -1,3 +1,5 @@
 /venv/
 scrapy.cfg
 config.py
+.idea
+__pycache__
