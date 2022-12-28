@@ -3,14 +3,19 @@ from scrapy.http import Response
 
 from YelpAPI import get_biz
 from get_url import get_url
+from get_start_url import get_start_url
 from yelpcrawler.items import YelpItem
+
+
+CATEGORY_NAME = "contractors"
+LOCATION = "San Francisco, CA"
 
 
 class BusinessesSpider(scrapy.Spider):
     name = "businesses"
 
     allowed_domains = ["www.yelp.com"]
-    start_urls = ["https://www.yelp.com/search?find_desc=contractors&find_loc=San+Francisco%2C+CA"]
+    start_urls = [get_start_url(category_name=CATEGORY_NAME, location=LOCATION)]
 
     def parse(self, response: Response, **kwargs):
         urls = response.css(".css-1agk4wl > span > a::attr(href)").extract()
